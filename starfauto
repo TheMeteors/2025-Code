@@ -1,0 +1,53 @@
+package org.firstinspires.ftc.teamcode;
+
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
+import com.qualcomm.robotcore.hardware.Blinker;
+import com.qualcomm.robotcore.hardware.DcMotor;
+
+
+@Autonomous(name = "hi test")
+
+public class StrafeAuton extends OpMode {
+    DcMotor frontright;
+    DcMotor backright;
+    DcMotor frontleft;
+    DcMotor backleft;
+    boolean isFirstLoop = true;
+    public void init() {
+        telemetry.addData("init","called");
+        backright = hardwareMap.get(DcMotor.class, "backright"); 
+        frontright = hardwareMap.get(DcMotor.class, "frontright");
+        backleft = hardwareMap.get(DcMotor.class, "backleft");
+    }
+    public void strafeLeft(double speed) {
+        frontleft.setPower(-speed);
+        backleft.setPower(speed);
+        frontright.setPower(speed);
+        backright.setPower(-speed);
+    }
+
+
+        
+    public void allStop() {
+        frontleft.setPower(0);
+        backleft.setPower(0);
+        frontright.setPower(0);
+        backright.setPower(0);
+        
+    }        
+        
+    }
+    public void loop() {
+        strafeLeft(0.1);
+        
+        
+        if (isFirstLoop) {
+            telemetry.addData("loop", "called");
+            isFirstLoop = false;
+        }
+    }
+}
+    
+    
